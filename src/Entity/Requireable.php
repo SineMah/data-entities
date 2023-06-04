@@ -11,6 +11,10 @@ trait Requireable
      */
     protected function validate(array $data): void
     {
+        if(count($this->requires()) === 0) {
+            return;
+        }
+
         $diff = array_diff($this->requires(), array_keys($data));
 
         if(count($diff) > 0) {
@@ -20,6 +24,6 @@ trait Requireable
 
     protected function requires(): array
     {
-        return $this->requireable;
+        return $this->requireable ?? [];
     }
 }
