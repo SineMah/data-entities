@@ -5,7 +5,7 @@ namespace Sinemah\DataEntities;
 use ReflectionClass;
 use ReflectionProperty;
 
-class Data
+abstract class Data
 {
     public static function from(array $data = []): static
     {
@@ -32,6 +32,15 @@ class Data
         }
 
         return $data;
+    }
+
+    public function get(string $key, $default = null): mixed
+    {
+        if(isset($this->{$key})) {
+            return $this->{$key};
+        }
+
+        return $default;
     }
 
     protected function validate(array $data): void
