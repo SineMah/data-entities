@@ -1,5 +1,5 @@
 # Data Entities
-A small lib to transfer from one application Layer to another.   
+A small lib to transfer from one application layer to another.   
 Valinor and Laravel-Data ain't focussing on a DTO core principle. Data Entities has some convenient methods included.
 
 ## Installation
