@@ -5,6 +5,7 @@ namespace Sinemah\DataEntities;
 use Error;
 use PHPUnit\Framework\TestCase;
 use Sinemah\DataEntities\Exceptions\MissingRequiredPropertyException;
+use Sinemah\DataEntities\Tests\DataEntityEmptyRequire;
 use Sinemah\DataEntities\Tests\DataEntityRequire;
 
 class DataEntityRequireTest extends TestCase
@@ -44,5 +45,12 @@ class DataEntityRequireTest extends TestCase
         $this->expectExceptionMessage('Missing properties: is_active,created_at');
 
         DataEntityRequire::from(['message' => 'Lorem Ipsum',]);
+    }
+
+    public function test_load_data_entity_from_array_with_empty_required_properties()
+    {
+        $data = DataEntityEmptyRequire::from(['message' => 'Lorem Ipsum',]);
+
+        $this->assertEquals(['message' => 'Lorem Ipsum',], $data->toArray());
     }
 }
