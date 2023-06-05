@@ -7,13 +7,14 @@ use ReflectionProperty;
 
 abstract class Data
 {
+    public function __construct(array $data = [])
+    {
+        $this->load($data);
+    }
+
     public static function from(array $data = []): static
     {
-        $instance = new static();
-
-        $instance->load($data);
-
-        return $instance;
+        return new static($data);
     }
 
     public function toArray(): array

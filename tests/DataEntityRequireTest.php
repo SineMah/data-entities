@@ -10,6 +10,38 @@ use Sinemah\DataEntities\Tests\DataEntityRequire;
 
 class DataEntityRequireTest extends TestCase
 {
+    public function test_load_data_entity_with_constructor_and_empty_array()
+    {
+        $this->expectException(MissingRequiredPropertyException::class);
+        $this->expectExceptionMessage('Missing properties: is_active,created_at,message');
+
+        new DataEntityRequire();
+    }
+
+    public function test_load_data_entity_with_constructor()
+    {
+        $now = time();
+        $data = new DataEntityRequire(
+            [
+                'created_at' => $now,
+                'message' => 'Lorem Ipsum',
+                'is_active' => false,
+            ]
+        );
+        $this->assertEquals($now, $data->created_at);
+        $this->assertEquals('Lorem Ipsum', $data->message);
+        $this->assertEquals(false, $data->is_active);
+
+        $this->assertEquals(
+            [
+                'created_at' => $now,
+                'message' => 'Lorem Ipsum',
+                'is_active' => false,
+            ],
+            $data->toArray()
+        );
+    }
+
     public function test_load_data_entity_from_array_as_required()
     {
         $now = time();

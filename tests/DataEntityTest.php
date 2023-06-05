@@ -20,6 +20,37 @@ class DataEntityTest extends TestCase
         $this->assertEmpty($data->toArray());
     }
 
+    public function test_load_data_entity_with_constructor_and_empty_array()
+    {
+        $data = new DataEntity();
+        $this->assertEquals([], $data->toArray());
+        $this->assertEmpty($data->toArray());
+    }
+
+    public function test_load_data_entity_with_constructor()
+    {
+        $now = time();
+        $data = new DataEntity(
+            [
+                'created_at' => $now,
+                'message' => 'Lorem Ipsum',
+                'is_active' => false,
+            ]
+        );
+        $this->assertEquals($now, $data->created_at);
+        $this->assertEquals('Lorem Ipsum', $data->message);
+        $this->assertEquals(false, $data->is_active);
+
+        $this->assertEquals(
+            [
+                'created_at' => $now,
+                'message' => 'Lorem Ipsum',
+                'is_active' => false,
+            ],
+            $data->toArray()
+        );
+    }
+
     public function test_load_data_entity_from_array()
     {
         $now = time();
