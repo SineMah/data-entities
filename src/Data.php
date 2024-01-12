@@ -47,11 +47,20 @@ abstract class Data
     protected function validate(array $data): void
     {}
 
+    protected function ignores(): array
+    {
+        return [];
+    }
+
     protected function load(array $data): void
     {
         $this->validate($data);
 
         foreach($data as $key => $value) {
+
+            if(in_array($key, $this->ignores())) {
+                continue;
+            }
 
             if(property_exists($this, $key)) {
                 $this->$key = $value;
